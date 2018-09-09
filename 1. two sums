@@ -5,10 +5,13 @@ class Solution:
         :type target: int
         :rtype: List[int]
         """
-        complement={}
-        for i,i_val in enumerate(nums): # through hashtable
-            if i_val in complement:
-                return [complement[i_val],i]
+        dict = {}
+        
+        for i, n in enumerate(nums):
+            complement = target - n
+            if complement in dict:
+                return [dict[complement], i]
             else:
-                complement[target-i_val]=i
-        return [-1,-1]
+                dict[n] = i
+                
+        raise ValueError('Two Sum not found')
