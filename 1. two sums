@@ -6,7 +6,7 @@ class Solution:
         :rtype: List[int]
         """
         complement={}
-        for i,i_val in enumerate(nums):
+        for i,i_val in enumerate(nums): # through hashtable
             if i_val in complement:
                 return [complement[i_val],i]
             else:
