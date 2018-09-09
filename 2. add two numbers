@@ -13,34 +13,31 @@ class Solution:
         """
         
         carry=0
-        result_head=ListNode(0)
-        result_head.next=l1
-        it1=l1
-        it2=l2
-        while(True):
-            sums=it1.val+it2.val+carry
-            carry,it1.val= int(sums/10),sums%10
-            if it1.next is None or it2.next is None:
-                break
-            it1=it1.next
-            it2=it2.next
+        result_head=l1
+        
+
+        while l1 and l2:  # [1. 先对当前node进行判断；对None的判断]
+            sums=l1.val+l2.val+carry
+            carry,l1.val= sums>=10,sums%10
+
+            cur=l1
+            l1=l1.next
+            l2=l2.next
 
                 
-        if it2.next is not None: # first check if it2 is not empty(i.e. it1 is empty), add to l1's tail
-            it1.next=it2.next
+        cur.next=l1 or l2  # [1. 对None的判断]
             
-        if it1.next is not None:  # if it2 or it1 is not empty, go on
-            it1=it1.next
-            while(True):
-                sums=it1.val+carry
-                carry,it1.val= int(sums/10),sums%10
-                if it1.next is None:
-                    break
-                it1=it1.next
-        if carry:
-            it1.next=ListNode(carry)
+        while carry: # [2.当仅剩一个或者0个linked list之后，用通过carry的循环，减少判断（仅一个linked list存在时当carry是0后，后面的链表就是答案）]
+            if not cur.next:
+                cur.next=ListNode(0+carry)
+                break
+            else:
+                sums=carry+cur.next.val
+                carry, cur.next.val=sums>=10,sums%10
+                cur=cur.next
+                
         
-        return result_head.next
+        return result_head
         
             
             
