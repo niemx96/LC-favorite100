@@ -12,32 +12,20 @@ class Solution:
         :rtype: ListNode
         """
         
-        # l1 is None:   # Case1
-        if not l1:
-            return l2
-        
-        #l1 not None   # Case2
-        head=ListNode(0)
-        head.next=l1
+        head=ListNode(None)
         cur=head
-
-        while(l1):
-            if l2 is None:
-                break
-                
-            elif l2.val<=l1.val:
+        
+        while l1 and l2:  # only 1 case
+            if l1.val<=l2.val:
+                cur.next=l1
+                l1=l1.next
+            else:
                 cur.next=l2
                 l2=l2.next
-                cur.next.next=l1
-                cur=cur.next
-            
-            else:
-                l1=l1.next
-                cur=cur.next
-                
-        #l1 is finish while l2 not   # Case3
-        if l2:
-            cur.next=l2
+            cur=cur.next
+             
+        cur.next=l1 or l2  # only 1 case
+        
 
         
         return head.next
