@@ -1,0 +1,26 @@
+import queue
+class Solution:
+    def isValid(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        pair={
+            '[':']',
+              ']':'[',
+              '{':'}',
+              '}':'{',
+              '(':')',
+              ')':'('
+             }
+        charQueue=queue.LifoQueue(1000)
+        for character in s:
+            if charQueue.empty():
+                charQueue.put(character)
+            else:
+                last=charQueue.get()
+                if pair[last] != character:
+                    charQueue.put(last)
+                    charQueue.put(character)
+        return charQueue.empty()
+            
