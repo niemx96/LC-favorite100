@@ -5,22 +5,25 @@ class Solution:
         :type s: str
         :rtype: bool
         """
+        
+        stack=[]
+        opening=set(['(','{','['])
         pair={
             '[':']',
-              ']':'[',
               '{':'}',
-              '}':'{',
               '(':')',
-              ')':'('
              }
-        charQueue=queue.LifoQueue(1000)
-        for character in s:
-            if charQueue.empty():
-                charQueue.put(character)
+             
+        for c in s:
+            if c in opening:
+                stack.append(c)
             else:
-                last=charQueue.get()
-                if pair[last] != character:
-                    charQueue.put(last)
-                    charQueue.put(character)
-        return charQueue.empty()
-            
+                # empty
+                if not stack:  # 比len(stack)!=0 高效   #list没有.empty()函数
+                    return False
+                
+                last=stack.pop()  # 可以用pop
+                if pair[last]!=c:
+                    return False
+        return stack==[]
+                
