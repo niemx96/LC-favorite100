@@ -1,0 +1,15 @@
+class Solution:
+    def removeDuplicates(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        if not nums:  #效率高于 num!=[]
+            return 0
+        
+        i=0
+        for j in nums:
+            if j!=nums[i]:
+                i+=1
+                nums[i]=j
+        return i+1
