@@ -1,0 +1,21 @@
+class Solution:
+    def searchInsert(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        # case 1
+        if not nums:
+            return 0
+        
+        # case 2
+        for i in range(len(nums)):
+            if target<=nums[i]:
+                return i
+ 
+            
+        # case 3
+        return len(nums)
+            
+    
