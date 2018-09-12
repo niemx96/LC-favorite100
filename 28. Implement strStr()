@@ -9,20 +9,15 @@ class Solution:
         if not needle:
             return 0
         
-        # case 2       
-        for begin in range(len(haystack)-len(needle)+1):
-            i=begin
-            j=0
-
-            while(j<len(needle) and haystack[i]==needle[j]):
-                i+=1
-                j+=1
-            if j==len(needle):
-                return begin
-                break
-                
-        # case 3
-        return -1
+        # case 2  
+        len_n=len(needle)
+        len_h=len(haystack)
+        list_=[begin for begin in range(len_h-len_n+1) if haystack[begin:begin+len_n]==needle]  # 用== 判断list
+        
+        if list_==[]:
+            return -1
+        else:
+            return list_[0]
             
         
         
